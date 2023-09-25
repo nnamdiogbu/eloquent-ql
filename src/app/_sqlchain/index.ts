@@ -7,6 +7,8 @@ import { OpenAIChat } from "langchain/llms/openai";
 export async function createSqlChain() {
   console.log("creating chain...........................");
   const db = await initializedDB();
+
+  console.log("datasource: ", db);
   // const data: { table_name: string }[] = await db.query(
   //   "SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema = 'public';"
   // );

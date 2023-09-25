@@ -1,7 +1,11 @@
 import { Redis } from "ioredis";
+import { createClient } from "@vercel/kv";
 
 export const redis = new Redis();
-
+const cacheClient = createClient({
+  url: process.env.KV_REST_API_URL as string,
+  token: process.env.KV_REST_API_TOKEN as string,
+});
 export async function queryFromCache<T>(key: string, dataFetcher?: () => Promise<T> | T, expiry = 3600) {
   const value = await getValue<T>(key);
   if (value) return value;
